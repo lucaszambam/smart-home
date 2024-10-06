@@ -105,8 +105,12 @@ io.on('connection', (socket) => {
         io.emit('estadoAltera', dispositivos);
     });
 
-    socket.on('ajustarVentilador', (velocidade) => {
+    socket.on('ligarVentilador', () => {
         dispositivos.quarto.ventiladorOn = !dispositivos.quarto.ventiladorOn;
+        io.emit('estadoAltera', dispositivos);
+    });
+
+    socket.on('ajustarVentilador', (velocidade) => {
         if (velocidade) dispositivos.quarto.ventiladorVelocidade = velocidade;
         io.emit('estadoAltera', dispositivos);
     });

@@ -64,7 +64,8 @@ body {
 }
 
 .geladeiraContainer,
-.fogaoContainer {
+.fogaoContainer,
+.ventiladorContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -449,6 +450,169 @@ body {
     animation-iteration-count: infinite;
     animation-fill-mode: both;
 }
+
+.fan {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    background: transparent;
+}
+
+.fan.velocidade-1 {
+    animation: spin 2s linear infinite;
+}
+
+.fan.velocidade-2 {
+    animation: spin 1s linear infinite;
+}
+
+.fan.velocidade-3 {
+    animation: spin 0.5s linear infinite;
+}
+
+.fan.off {
+    animation: spin 0s linear infinite;
+}
+
+.fan:after {
+	content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    border: 15px double blueviolet;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+.blade {
+	position: absolute;
+    width: 35px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50px;
+    transform-origin: 50% 50%;
+	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+.blade:nth-child(1) {
+	transform: rotate(0deg) translate(30px) rotate(0deg);
+}
+.blade:nth-child(2) {
+	transform: rotate(120deg) translate(30px) rotate(0deg);
+}
+.blade:nth-child(3) {
+	transform: rotate(240deg) translate(30px) rotate(0deg);
+}
+@keyframes spin {
+    0% {
+        transform: roate(0deg);
+    }
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.rxWorld {
+    width: 100px;
+    height: 100px;
+    margin-top: 15px;
+}
+
+.rnOuter {
+    background: #ae1313;
+    overflow: hidden;
+    position: relative;
+}
+.rnInner {
+    width: 100%;
+    position: absolute;
+    top: -10%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transform-style: preserve-3d;
+    transition: transform 6s ease;
+    transform-origin: -120% top;
+}
+.rnUnit {
+    width:  14px;
+    height: 120vh;
+    background: repeating-linear-gradient(to left,#e61a1a 4vw,#8a0f0f 8vw,#f07575 10vw);
+    background-size: 100% 100%;
+    display: inline-block;
+    transform-origin: 0 0%;
+    transform: rotate(3deg);
+    animation: rnUnit 2s ease infinite;
+}
+@keyframes rnUnit {
+    50% {
+        transform: rotate(-3deg);
+   }
+}
+.rnUnit:nth-child(1) {
+    animation-delay: -0.1s;
+}
+.rnUnit:nth-child(2) {
+    animation-delay: -0.2s;
+}
+.rnUnit:nth-child(3) {
+    animation-delay: -0.3s;
+}
+.rnUnit:nth-child(4) {
+    animation-delay: -0.4s;
+}
+.rnUnit:nth-child(5) {
+    animation-delay: -0.5s;
+}
+.rnUnit:nth-child(6) {
+    animation-delay: -0.6s;
+}
+.rnUnit:nth-child(7) {
+    animation-delay: -0.7s;
+}
+.rnUnit:nth-child(8) {
+    animation-delay: -0.8s;
+}
+.rnUnit:nth-child(9) {
+    animation-delay: -0.9s;
+}
+.rnUnit:nth-child(10) {
+    animation-delay: -1s;
+}
+.aoTable {
+    display: table;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+}
+
+.aoTableCell {
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    background: #5d0e0e;
+}
+
+.window {
+    background-color: #2196F3;
+}
+
+.rnOuter.open .rnInner {
+    transform-origin: -120% top;
+    transform: scaleX(0);
+}
+.rnOuter.open .aoTableCell {
+    color: white;
+}
+
 
 .github-repo {
 	position: fixed;

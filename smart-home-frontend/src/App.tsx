@@ -108,6 +108,10 @@ const App: React.FC = () => {
         socket.emit('acenderLuzQuarto');
     };
 
+    const ligarVentilador = () => {
+        socket.emit('ligarVentilador');
+    }
+
     const ajustarVentilador = () => {
         const novaVelocidade = dispositivos.quarto.ventiladorVelocidade === 3 ? 1 : dispositivos.quarto.ventiladorVelocidade + 1;
         socket.emit('ajustarVentilador', novaVelocidade);
@@ -198,18 +202,60 @@ const App: React.FC = () => {
                 <div className='comodo'>
                     <h2>Quarto</h2>
                     <div className="options">
-                        <button onClick={acenderLuzQuarto}>
+                        <button onClick={acenderLuzQuarto} style={{ width: '91px' }}>
                             {dispositivos.quarto.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
                         </button>
-                        <button onClick={ajustarVentilador}>
-                            {dispositivos.quarto.ventiladorOn ? `Ajustar Ventilador (Velocidade: ${dispositivos.quarto.ventiladorVelocidade})` : 'Ligar Ventilador'}
+                        <button onClick={ligarVentilador} style={{ width: '128px' }}>
+                            {dispositivos.quarto.ventiladorOn ? `Desligar Ventilador` : 'Ligar Ventilador'}
                         </button>
-                        <button onClick={controlarCortinas}>
+                        <button onClick={controlarCortinas} style={{ width: '111px' }}>
                             {dispositivos.quarto.cortinasAbertas ? 'Fechar Cortinas' : 'Abrir Cortinas'}
                         </button>
                     </div>
                     <div className='feedback'>
-                        <img src='imgs\luz.png' className={`lampada status ${dispositivos.quarto.luzOn ? 'on' : 'off'}`} />
+                        <div className='luzContainer'>
+                            <img src='imgs\luz.png' className={`lampada status ${dispositivos.quarto.luzOn ? 'on' : 'off'}`} />
+                        </div>
+                        <div className="ventiladorContainer">
+                            <div className={`fan velocidade-${dispositivos.quarto.ventiladorVelocidade} ${dispositivos.quarto.ventiladorOn ? 'on' : 'off'}`}>
+                                <div className="blade"></div>
+                                <div className="blade"></div>
+                                <div className="blade"></div>
+                            </div>
+                            {dispositivos.quarto.ventiladorOn && <button onClick={ajustarVentilador} className='velocidade'>{`(Velocidade: ${dispositivos.quarto.ventiladorVelocidade})`}</button>}
+                        </div>
+                        <div className="cortinasContainer">
+                            <div className="rxWorld">
+
+                                <section className={`rnOuter ${dispositivos.quarto.cortinasAbertas ? 'open' : 'closed'}`}>
+                                    
+                                <section className="aoTable">
+                                    <div className="aoTableCell">
+                                        <div className="window"></div>
+                                        <div className="window"></div>
+                                        <div className="window"></div>
+                                        <div className="window"></div>
+                                    </div>
+                                </section>
+                                    
+                                    <div className='rnInner'>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        <div className='rnUnit'></div>
+                                        
+                                    </div>
+                                </section>
+        
+        
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
