@@ -1,5 +1,18 @@
+body {
+	margin: 0;
+	background-color: #0d1117;
+	height: 100vh;
+}
+#root {
+	font-family: monospace, Helvetica, Arial, sans-serif;
+	text-align: center;
+	color: #2c3e50;
+	height: 100%;
+}
+
 .casa h1 {
     text-align: center;
+    color: white;
 }
 
 .casa {
@@ -18,12 +31,14 @@
 .comodo {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 3px solid #010409;
     border-radius: 10px;
     align-items: center;
     width: 500px;
     height: 300px;
-    padding: 40px;
+    padding: 40px;;
+    background-color: #33425b;
+    color: white;
 }
 
 .lampada {
@@ -37,9 +52,27 @@
     width: 158px;
 }
 
-.arContainer, .tvContainer {
+.geladeira,
+.fogao {
+    height: 100px;
+}
+
+.arContainer,
+.tvContainer {
     display: flex;
     flex-direction: column;
+}
+
+.geladeiraContainer,
+.fogaoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fogaoContainer {
+    position: relative;
 }
 
 .tvContainer {
@@ -54,7 +87,8 @@
     filter: grayscale(100%);
 }
 
-.options, .feedback {
+.options,
+.feedback {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -71,8 +105,9 @@
     width: 160px;
     border: 5px solid black;
     margin-top: 15px;
-  }
-  .inner {
+}
+
+.inner {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -81,99 +116,107 @@
     justify-content: center;
     background: red;
     overflow: hidden;
-  }
-  .screen.off .inner {
+}
+
+.screen.off .inner {
     animation: screenoff 1s linear forwards;
-  }
-  
-  @keyframes screenoff {
+}
+
+@keyframes screenoff {
     0% {
-      height: 100vh;
+        height: 100vh;
     }
+
     10% {
-      background: white;
+        background: white;
     }
+
     60% {
-      height: 40px;
-      border-radius: 0%;
+        height: 40px;
+        border-radius: 0%;
     }
+
     70% {
-      height: 20px;
-      border-radius: 20%;
+        height: 20px;
+        border-radius: 20%;
     }
+
     80% {
-      height: 10px;
-      width: 100%;
+        height: 10px;
+        width: 100%;
     }
+
     90% {
-      width: 50%;
-      height: 5px;
+        width: 50%;
+        height: 5px;
     }
+
     95% {
-      height: 2px;
+        height: 2px;
     }
+
     97% {
-      width: 100%;
+        width: 100%;
     }
+
     100% {
-      height: 1px;
-      width: 0;
-      background: white;
+        height: 1px;
+        width: 0;
+        background: white;
     }
-  }
-  /* ------------------- */
-  /* just for fun below  */
-  /* ------------------- */
-  .screen .inner {
-    background: repeating-linear-gradient(
-        2deg,
-        black,
-        white 4px,
-        black 11px,
-        transparent 21px,
-        transparent 53px,
-        white 53px,
-        #ccc 41px
-      ),
-      repeating-linear-gradient(
-        black,
-        white 5px,
-        white 10px,
-        transparent 11px,
-        transparent 28px,
-        #333 28px
-      ),
-      url(https://picsum.photos/id/1015/2000/1500);
-  
+}
+
+.screen .inner {
+    background: repeating-linear-gradient(2deg,
+            black,
+            white 4px,
+            black 11px,
+            transparent 21px,
+            transparent 53px,
+            white 53px,
+            #ccc 41px),
+        repeating-linear-gradient(black,
+            white 5px,
+            white 10px,
+            transparent 11px,
+            transparent 28px,
+            #333 28px),
+        url(https://picsum.photos/id/1015/2000/1500);
+
     animation: noise 30s infinite;
     transform: translateX(-0.05%);
-  }
-  
-  @keyframes noise {
+}
+
+@keyframes noise {
     0% {
-      background-position: 100px 50px, 200px 70px;
-      opacity: 1;
+        background-position: 100px 50px, 200px 70px;
+        opacity: 1;
     }
+
     25%,
     75% {
-      background-position: -10px -150px, -250px -300px;
-      opacity: 0.9;
+        background-position: -10px -150px, -250px -300px;
+        opacity: 0.9;
     }
+
     50% {
-      background-position: 20px 30px, 10px 50px;
-      opacity: 0.8;
+        background-position: 20px 30px, 10px 50px;
+        opacity: 0.8;
     }
+
     100% {
-      background-position: 750px 26px, 100px 50px;
-      opacity: 0.95;
+        background-position: 750px 26px, 100px 50px;
+        opacity: 0.95;
     }
-  }
-  @media (prefers-reduced-motion) {
+}
+
+@media (prefers-reduced-motion) {
     .screen .inner {
-      animation: none;
+        animation: none;
     }
-  }
-  .turn-on {
+}
+
+.turn-on {
     background: rgba(255, 255, 255, 0.7);
     padding: 20px;
     margin: 0;
@@ -182,8 +225,244 @@
     top: 0;
     transform: translateX(-100%);
     transition: 5s ease 2s;
-  }
-  .off + .turn-on {
+}
+
+.off+.turn-on {
     transform: translateX(0);
     pointer-events: none;
-  }
+}
+
+@keyframes scaleUpDown {
+
+    0%,
+    100% {
+        transform: scaleY(1) scaleX(1);
+    }
+
+    50%,
+    90% {
+        transform: scaleY(1.1);
+    }
+
+    75% {
+        transform: scaleY(0.95);
+    }
+
+    80% {
+        transform: scaleX(0.95);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: skewX(0) scale(1);
+    }
+
+    50% {
+        transform: skewX(5deg) scale(0.9);
+    }
+}
+
+@keyframes particleUp {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: -100%;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        background-color: #ef5a00;
+    }
+
+    50% {
+        background-color: #ff7800;
+    }
+}
+
+.fire {
+    position: absolute;
+    top: 17px;
+    left: 24%;
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fire.off {
+    display: none;
+}
+
+.fire.potencia-1 {
+    top: 20px;
+}
+
+.fire.potencia-2 {
+    top: 15px;
+}
+
+.fire.potencia-3 {
+    top: 10px;
+}
+
+.fire.potencia-4 {
+    top: 5px;
+}
+
+.fire.potencia-5 {
+    top: 1px;
+}
+
+.fire-center {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    animation: scaleUpDown 3s ease-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-center .main-fire {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(farthest-corner at 10px 0, #d43300 0%, #ef5a00 95%);
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-center .particle-fire {
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    width: 10px;
+    height: 10px;
+    background-color: #ef5a00;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-right {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    animation: shake 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-right .main-fire {
+    position: absolute;
+    top: 15%;
+    right: -25%;
+    width: 80%;
+    height: 80%;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-right .particle-fire {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-left {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    animation: shake 3s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-left .main-fire {
+    position: absolute;
+    top: 15%;
+    left: -20%;
+    width: 80%;
+    height: 80%;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-left .particle-fire {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 10%;
+    height: 10%;
+    background-color: #ef5a00;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 3s infinite ease-out 0;
+    animation-fill-mode: both;
+}
+
+.fire-bottom .main-fire {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    width: 75%;
+    height: 75%;
+    background-color: #ff7800;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 100% 40%;
+    filter: blur(10px);
+    animation: glow 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.github-repo {
+	position: fixed;
+	bottom: 10px;
+	right: 20px;
+}
+
+.github-repo a img {
+	scale: 0.45;
+	opacity: 0.5;
+	transition: all .25s;
+}
+
+.github-repo a img:hover {
+	opacity: 1;
+	scale: 0.5;
+}

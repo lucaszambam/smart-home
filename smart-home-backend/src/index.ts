@@ -78,8 +78,12 @@ io.on('connection', (socket) => {
         io.emit('estadoAltera', dispositivos);
     });
 
-    socket.on('ajustarFogao', (potencia) => {
+    socket.on('ligarFogao', () => {
         dispositivos.cozinha.fogaoOn = !dispositivos.cozinha.fogaoOn;
+        io.emit('estadoAltera', dispositivos);
+    })
+
+    socket.on('ajustarFogao', (potencia) => {
         if (potencia) dispositivos.cozinha.fogaoPotencia = potencia;
         io.emit('estadoAltera', dispositivos);
     });

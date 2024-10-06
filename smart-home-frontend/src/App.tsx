@@ -95,6 +95,10 @@ const App: React.FC = () => {
         socket.emit('acenderLuzCozinha');
     };
 
+    const ligarFogao = () => {
+        socket.emit('ligarFogao');
+    }
+
     const ajustarFogao = () => {
         const novaPotencia = dispositivos.cozinha.fogaoPotencia === 5 ? 1 : dispositivos.cozinha.fogaoPotencia + 1;
         socket.emit('ajustarFogao', novaPotencia);
@@ -115,7 +119,7 @@ const App: React.FC = () => {
 
     return (
         <div className='casa'>
-            <h1>Casa Inteligente</h1>
+            <h1>Smart Home Controller</h1>
 
             <div className='comodos'>
                 <div className='comodo'>
@@ -151,17 +155,43 @@ const App: React.FC = () => {
                 <div className='comodo'>
                     <h2>Cozinha</h2>
                     <div className="options">
-                        <button onClick={acenderLuzCozinha}>
+                        <button onClick={acenderLuzCozinha} style={{ width: '91px' }}>
                             {dispositivos.cozinha.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
                         </button>
-                        <button onClick={ajustarFogao}>
-                            {dispositivos.cozinha.fogaoOn ? `Desligar Fogão (Potência: ${dispositivos.cozinha.fogaoPotencia})` : 'Ligar Fogão'}
+                        <button onClick={ligarFogao} style={{ width: '107px' }}>
+                            {dispositivos.cozinha.fogaoOn ? `Desligar Fogão` : 'Ligar Fogão'}
                         </button>
                     </div>
                     <div className='feedback'>
-                        <p>Temperatura da Geladeira: {dispositivos.cozinha.geladeiraTemperatura}°C</p>
-                        {dispositivos.cozinha.alertaGeladeira && <p className='alerta'>Alerta: Temperatura alta!</p>}
-                        <img src='imgs\luz.png' className={`lampada status ${dispositivos.cozinha.luzOn ? 'on' : 'off'}`} />
+                        <div className='luzContainer'>
+                            <img src='imgs\luz.png' className={`lampada status ${dispositivos.cozinha.luzOn ? 'on' : 'off'}`} />
+                        </div>
+                        <div className='geladeiraContainer'>
+                            <img src='imgs\geladeira.png' className='geladeira' />
+                            <p>Temperatura da Geladeira: {dispositivos.cozinha.geladeiraTemperatura}°C</p>
+                            {dispositivos.cozinha.alertaGeladeira && <p className='alerta'>Alerta: Temperatura alta!</p>}
+                        </div>
+                        <div className='fogaoContainer'>
+                            <div className={`fire potencia-${dispositivos.cozinha.fogaoPotencia} ${dispositivos.cozinha.fogaoOn ? 'on' : 'off'}`}>
+                                <div className="fire-left">
+                                    <div className="main-fire"></div>
+                                    <div className="particle-fire"></div>
+                                </div>
+                                <div className="fire-center">
+                                    <div className="main-fire"></div>
+                                    <div className="particle-fire"></div>
+                                </div>
+                                <div className="fire-right">
+                                    <div className="main-fire"></div>
+                                    <div className="particle-fire"></div>
+                                </div>
+                                <div className="fire-bottom">
+                                    <div className="main-fire"></div>
+                                </div>
+                            </div>
+                            <img src='imgs\stove.png' className={`fogao status ${dispositivos.cozinha.fogaoOn ? 'on' : 'off'}`} />
+                            {dispositivos.cozinha.fogaoOn && <button onClick={ajustarFogao} className='potencia'>{`(Potência: ${dispositivos.cozinha.fogaoPotencia})`}</button>}
+                        </div>
                     </div>
                 </div>
 
@@ -183,6 +213,16 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <div style={{ 'marginTop': '55px'}}>
+                <img src="imgs/smart-home.png"  style={{ 'height': '230px'}} alt="Smart Home Logo" />
+            </div>
+
+            <div className="github-repo">
+                <a href="https://github.com/lucaszambam/smart-home" target="_blank">
+                    <img src="imgs/github-mark-white.svg" alt="GitHub Repository" />
+                </a>
+	</div>
         </div>
     );
 };
