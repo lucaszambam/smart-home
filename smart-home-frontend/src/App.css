@@ -4,7 +4,15 @@
 
 .casa {
     display: flex;
-    gap: 50px;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.comodos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 }
 
 .comodo {
@@ -15,11 +23,27 @@
     align-items: center;
     width: 500px;
     height: 300px;
+    padding: 40px;
 }
 
 .lampada {
     height: 100px;
     rotate: 180deg;
+}
+
+.ar {
+    height: 100px;
+    object-fit: contain;
+    width: 158px;
+}
+
+.arContainer, .tvContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.tvContainer {
+    gap: 25px;
 }
 
 .status.on {
@@ -29,3 +53,137 @@
 .status.off {
     filter: grayscale(100%);
 }
+
+.options, .feedback {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    height: 75px;
+    width: 160px;
+    border: 5px solid black;
+    margin-top: 15px;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    overflow: hidden;
+  }
+  .screen.off .inner {
+    animation: screenoff 1s linear forwards;
+  }
+  
+  @keyframes screenoff {
+    0% {
+      height: 100vh;
+    }
+    10% {
+      background: white;
+    }
+    60% {
+      height: 40px;
+      border-radius: 0%;
+    }
+    70% {
+      height: 20px;
+      border-radius: 20%;
+    }
+    80% {
+      height: 10px;
+      width: 100%;
+    }
+    90% {
+      width: 50%;
+      height: 5px;
+    }
+    95% {
+      height: 2px;
+    }
+    97% {
+      width: 100%;
+    }
+    100% {
+      height: 1px;
+      width: 0;
+      background: white;
+    }
+  }
+  /* ------------------- */
+  /* just for fun below  */
+  /* ------------------- */
+  .screen .inner {
+    background: repeating-linear-gradient(
+        2deg,
+        black,
+        white 4px,
+        black 11px,
+        transparent 21px,
+        transparent 53px,
+        white 53px,
+        #ccc 41px
+      ),
+      repeating-linear-gradient(
+        black,
+        white 5px,
+        white 10px,
+        transparent 11px,
+        transparent 28px,
+        #333 28px
+      ),
+      url(https://picsum.photos/id/1015/2000/1500);
+  
+    animation: noise 30s infinite;
+    transform: translateX(-0.05%);
+  }
+  
+  @keyframes noise {
+    0% {
+      background-position: 100px 50px, 200px 70px;
+      opacity: 1;
+    }
+    25%,
+    75% {
+      background-position: -10px -150px, -250px -300px;
+      opacity: 0.9;
+    }
+    50% {
+      background-position: 20px 30px, 10px 50px;
+      opacity: 0.8;
+    }
+    100% {
+      background-position: 750px 26px, 100px 50px;
+      opacity: 0.95;
+    }
+  }
+  @media (prefers-reduced-motion) {
+    .screen .inner {
+      animation: none;
+    }
+  }
+  .turn-on {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    margin: 0;
+    border: 2px solid red;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: 5s ease 2s;
+  }
+  .off + .turn-on {
+    transform: translateX(0);
+    pointer-events: none;
+  }

@@ -74,8 +74,16 @@ const App: React.FC = () => {
         socket.emit('acenderLuzSala');
     };
 
+    const ligarTvSala = () => {
+        socket.emit('ligarTvSala');
+    }
+
     const controlarTv = () => {
         socket.emit('controlarTv', dispositivos.sala.canalAtual === 3 ? 1 : dispositivos.sala.canalAtual + 1);
+    };
+
+    const ligarArCondicionado = () => {
+        socket.emit('ligarArCondicionado');
     };
 
     const ajustarArCondicionado = () => {
@@ -109,57 +117,70 @@ const App: React.FC = () => {
         <div className='casa'>
             <h1>Casa Inteligente</h1>
 
-            <div className='comodo'>
-                <h2>Sala de Estar</h2>
-                <div className="options">
-                    <button onClick={acenderLuzSala}>
-                        {dispositivos.sala.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
-                    </button>
-                    <button onClick={controlarTv}>
-                        {dispositivos.sala.tvOn ? `Desligar TV (Canal ${dispositivos.sala.canalAtual})` : 'Ligar TV'}
-                    </button>
-                    <button onClick={ajustarArCondicionado}>
-                        {dispositivos.sala.arCondicionadoOn ? `Ajustar Ar (Temp: ${dispositivos.sala.temperatura}°C)` : 'Ligar Ar-Condicionado'}
-                    </button>
-
+            <div className='comodos'>
+                <div className='comodo'>
+                    <h2>Sala de Estar</h2>
+                    <div className="options">
+                        <button onClick={acenderLuzSala} style={{ width: '91px' }}>
+                            {dispositivos.sala.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
+                        </button>
+                        <button onClick={ligarTvSala}>
+                            {dispositivos.sala.tvOn ? `Desligar TV` : 'Ligar TV'}
+                        </button>
+                        <button onClick={ligarArCondicionado} style={{ width: '168px' }}>
+                            {dispositivos.sala.arCondicionadoOn ? `Desligar Ar-Condicionado` : 'Ligar Ar-Condicionado'}
+                        </button>
+                    </div>
                     <div className='feedback'>
-                        <img src='imgs\luz.png' className={`lampada status ${dispositivos.sala.luzOn ? 'on' : 'off'}`} />
+                        <div className='luzContainer'>
+                            <img src='imgs\luz.png' className={`lampada status ${dispositivos.sala.luzOn ? 'on' : 'off'}`} />
+                        </div>
+                        <div className='tvContainer'>
+                            <div className={`screen ${!dispositivos.sala.tvOn ? 'off' : 'on'}`} >
+                                <div className="inner"></div>
+                            </div>
+                            {dispositivos.sala.tvOn && <button onClick={controlarTv} className='canal'>{`Trocar (Canal ${dispositivos.sala.canalAtual})`}</button>}
+                        </div>
+                        <div className='arContainer'>
+                            <img src='imgs\ar.png' className={`ar status ${dispositivos.sala.arCondicionadoOn ? 'on' : 'off'}`} />
+                            {dispositivos.sala.arCondicionadoOn && <button onClick={ajustarArCondicionado} className='temperatura'>{`Ajustar Ar (Temp: ${dispositivos.sala.temperatura}°C)`}</button>}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='comodo'>
-                <h2>Cozinha</h2>
-                <div className="options">
-                    <button onClick={acenderLuzCozinha}>
-                        {dispositivos.cozinha.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
-                    </button>
-                    <button onClick={ajustarFogao}>
-                        {dispositivos.cozinha.fogaoOn ? `Desligar Fogão (Potência: ${dispositivos.cozinha.fogaoPotencia})` : 'Ligar Fogão'}
-                    </button>
+                <div className='comodo'>
+                    <h2>Cozinha</h2>
+                    <div className="options">
+                        <button onClick={acenderLuzCozinha}>
+                            {dispositivos.cozinha.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
+                        </button>
+                        <button onClick={ajustarFogao}>
+                            {dispositivos.cozinha.fogaoOn ? `Desligar Fogão (Potência: ${dispositivos.cozinha.fogaoPotencia})` : 'Ligar Fogão'}
+                        </button>
+                    </div>
+                    <div className='feedback'>
+                        <p>Temperatura da Geladeira: {dispositivos.cozinha.geladeiraTemperatura}°C</p>
+                        {dispositivos.cozinha.alertaGeladeira && <p className='alerta'>Alerta: Temperatura alta!</p>}
+                        <img src='imgs\luz.png' className={`lampada status ${dispositivos.cozinha.luzOn ? 'on' : 'off'}`} />
+                    </div>
                 </div>
-                <div className='feedback'>
-                    <p>Temperatura da Geladeira: {dispositivos.cozinha.geladeiraTemperatura}°C</p>
-                    {dispositivos.cozinha.alertaGeladeira && <p className='alerta'>Alerta: Temperatura alta!</p>}
-                    <img src='imgs\luz.png' className={`lampada status ${dispositivos.cozinha.luzOn ? 'on' : 'off'}`} />
-                </div>
-            </div>
 
-            <div className='comodo'>
-                <h2>Quarto</h2>
-                <div className="options">
-                    <button onClick={acenderLuzQuarto}>
-                        {dispositivos.quarto.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
-                    </button>
-                    <button onClick={ajustarVentilador}>
-                        {dispositivos.quarto.ventiladorOn ? `Ajustar Ventilador (Velocidade: ${dispositivos.quarto.ventiladorVelocidade})` : 'Ligar Ventilador'}
-                    </button>
-                    <button onClick={controlarCortinas}>
-                        {dispositivos.quarto.cortinasAbertas ? 'Fechar Cortinas' : 'Abrir Cortinas'}
-                    </button>
-                </div>
-                <div className='feedback'>
-                    <img src='imgs\luz.png' className={`lampada status ${dispositivos.quarto.luzOn ? 'on' : 'off'}`} />
+                <div className='comodo'>
+                    <h2>Quarto</h2>
+                    <div className="options">
+                        <button onClick={acenderLuzQuarto}>
+                            {dispositivos.quarto.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
+                        </button>
+                        <button onClick={ajustarVentilador}>
+                            {dispositivos.quarto.ventiladorOn ? `Ajustar Ventilador (Velocidade: ${dispositivos.quarto.ventiladorVelocidade})` : 'Ligar Ventilador'}
+                        </button>
+                        <button onClick={controlarCortinas}>
+                            {dispositivos.quarto.cortinasAbertas ? 'Fechar Cortinas' : 'Abrir Cortinas'}
+                        </button>
+                    </div>
+                    <div className='feedback'>
+                        <img src='imgs\luz.png' className={`lampada status ${dispositivos.quarto.luzOn ? 'on' : 'off'}`} />
+                    </div>
                 </div>
             </div>
         </div>
