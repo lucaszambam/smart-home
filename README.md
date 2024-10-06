@@ -51,8 +51,8 @@ Desenvolver uma aplicação de casa inteligente que simula o controle e monitora
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/smart-app.git
-cd smart-app
+git clone https://github.com/lucaszambam/smart-home.git
+cd smart-home
 ```
 
 ### 2. Configuração do Backend
