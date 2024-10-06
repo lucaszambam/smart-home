@@ -1,0 +1,31 @@
+.casa h1 {
+    text-align: center;
+}
+
+.casa {
+    display: flex;
+    gap: 50px;
+}
+
+.comodo {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+}
+
+.lampada {
+    height: 100px;
+    rotate: 180deg;
+}
+
+.status.on {
+    filter: grayscale(0%);
+}
+
+.status.off {
+    filter: grayscale(100%);
+}
