@@ -97,6 +97,11 @@ const App: React.FC = () => {
 
     const ligarFogao = () => {
         socket.emit('ligarFogao');
+    };
+
+    const ajustarGeladeira = () => {
+        const novaTemperatura = dispositivos.cozinha.geladeiraTemperatura === 14 ? -1 : dispositivos.cozinha.geladeiraTemperatura + 1;
+        socket.emit('verificarGeladeira', novaTemperatura);
     }
 
     const ajustarFogao = () => {
@@ -161,6 +166,9 @@ const App: React.FC = () => {
                     <div className="options">
                         <button onClick={acenderLuzCozinha} style={{ width: '91px' }}>
                             {dispositivos.cozinha.luzOn ? 'Desligar Luz' : 'Ligar Luz'}
+                        </button>
+                        <button onClick={ajustarGeladeira} style={{ width: '168px' }}>
+                            {`Ajustar Temperatura`}
                         </button>
                         <button onClick={ligarFogao} style={{ width: '107px' }}>
                             {dispositivos.cozinha.fogaoOn ? `Desligar Fogão` : 'Ligar Fogão'}
@@ -268,7 +276,7 @@ const App: React.FC = () => {
                 <a href="https://github.com/lucaszambam/smart-home" target="_blank">
                     <img src="imgs/github-mark-white.svg" alt="GitHub Repository" />
                 </a>
-	</div>
+	        </div>
         </div>
     );
 };
